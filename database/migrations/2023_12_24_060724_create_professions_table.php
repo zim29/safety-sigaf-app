@@ -12,28 +12,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('professions', function (Blueprint $table) {
-                $table->id();
-                $table->string('name', 50)->unique();
-                $table->timestamps();
-                $table->softDeletes();
-                $table->unsignedBigInteger('creator_id');
-                $table->unsignedBigInteger('updater_id')->nullable();
-                $table->unsignedBigInteger('deleter_id')->nullable();
+            $table->id();
+            $table->string('name', 50)->unique();
+            $table->timestamps();
+            $table->softDeletes();
+            $table->unsignedBigInteger('creator_id');
+            $table->unsignedBigInteger('updater_id')->nullable();
+            $table->unsignedBigInteger('deleter_id')->nullable();
 
-                $table->foreign('creator_id')
-                            ->on('users')
-                            ->references('id')
-                            ->restrictOnDelete();
+            $table->foreign('creator_id')
+                        ->on('users')
+                        ->references('id')
+                        ->restrictOnDelete();
 
-                $table->foreign('updater_id')
-                            ->on('users')
-                            ->references('id')
-                            ->restrictOnDelete();
+            $table->foreign('updater_id')
+                        ->on('users')
+                        ->references('id')
+                        ->restrictOnDelete();
 
-                $table->foreign('deleter_id')
-                            ->on('users')
-                            ->references('id')
-                            ->restrictOnDelete();
+            $table->foreign('deleter_id')
+                        ->on('users')
+                        ->references('id')
+                        ->restrictOnDelete();
         });
 
         Schema::table( 'users', function ( Blueprint $table ) {
