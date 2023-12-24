@@ -19,6 +19,7 @@ class Country extends Model
 
     protected $fillable = [
         'name',
+        'code',
         'creator_id',
         'updater_id',
         'deleter_id',
@@ -35,6 +36,13 @@ class Country extends Model
     {
         return Attribute::make(
             set: fn ( string $value ) => ucwords( strtolower($value) ),
+        );
+    } 
+
+    protected function code () : Attribute 
+    {
+        return Attribute::make(
+            set: fn ( string $value ) => strtoupper($value),
         );
     } 
 
