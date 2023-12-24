@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50)->unique();
-            $table->string('country_code', 50)->unique();
+            $table->char('country_code', 2);
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('creator_id')->nullable();
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->foreign('country_code')
                         ->on('countries')
                         ->references('code')
-                        ->restrictOnDelete();
+                        ->cascadeOnDelete();
         });
 
     }
