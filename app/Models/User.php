@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+use Carbon;
 
 class User extends Authenticatable
 {
@@ -19,8 +23,22 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
         'password',
+        'document_type_id',
+        'document_number',
+        'phone_number',
+        'dob',
+        'profession_id',
+        'brigade_id',
+        'gender_id',
+        'blood_type_id',
+        'allergies',
+        'city_id',
+        'c_terminal_id',
+        'em_co_name',
+        'em_co_phone',
     ];
 
     /**
@@ -42,4 +60,63 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    /**
+     * 
+     *  Mutators and Accessors
+     *  
+     *  
+     * */
+
+    protected function name () : Attribute 
+    {
+        return Attribute::make(
+            set: fn ( string $value ) => ucwords( strtolower($value) ),
+        );
+    } 
+
+    protected function surname () : Attribute 
+    {
+        return Attribute::make(
+            set: fn ( string $value ) => ucwords( strtolower($value) ),
+        );
+    } 
+
+    protected function email () : Attribute 
+    {
+        return Attribute::make(
+            set: fn ( string $value ) => strtolower( $value ),
+        );
+    } 
+
+    protected function emCoName () : Attribute 
+    {
+        return Attribute::make(
+            set: fn ( string $value ) => ucwords( strtolower( $value ) ),
+        );
+    } 
+
+    protected function dob () : Attribute 
+    {
+        return Attribute::make(
+            get: fn ( string $value ) => Carbon::parse( $value )->format( 'd/m/Y' ),
+        );
+    } 
+
+
+    /**
+     * 
+     *  Relations
+     *  
+     *  
+     * */
+
+    public function documentType () : BelongsTo
+    {
+        return $this->belongsTo(DocumentType::class);
+    }
+
+
+
 }
