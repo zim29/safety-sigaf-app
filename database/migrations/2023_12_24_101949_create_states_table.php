@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('genders', function (Blueprint $table) {
+        Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50)->unique();
+            $table->string('country_code', 50)->unique();
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('creator_id')->nullable();
@@ -34,14 +35,13 @@ return new class extends Migration
                         ->on('users')
                         ->references('id')
                         ->restrictOnDelete();
-        });
 
-        Schema::table( 'users', function ( Blueprint $table ) {
-            $table->foreign('gender_id')
-                        ->on('genders')
-                        ->references('id')
+            $table->foreign('country_code')
+                        ->on('countries')
+                        ->references('code')
                         ->restrictOnDelete();
         });
+
     }
 
     /**
@@ -49,17 +49,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table( 'genders', function ( Blueprint $table ) {
-            $table->dropForeign(['creator_id']);
-            $table->dropForeign(['updater_id']);
-            $table->dropForeign(['deleter_id']);
-        });
-
-        Schema::table( 'users', function ( Blueprint $table ) {
-            $table->dropForeign(['gender_id']);
-        });
-
-
-        Schema::dropIfExists('genders');
+        Schema::dropIfExists('states');
     }
 };

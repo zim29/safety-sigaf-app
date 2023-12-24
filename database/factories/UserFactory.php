@@ -71,7 +71,7 @@ class UserFactory extends Factory
             'gender_id' => Gender::inRandomOrder()->first()->id,
             'em_co_name' => fake()->name(),
             'em_co_phone' => fake()->unique()->e164PhoneNumber(),
-            'allergies' => faker()->randomElement($allergies),
+            'allergies' => fake()->randomElement($allergies),
             'blood_type_id' => BloodType::inRandomOrder()->first()->id,
             'city_id' => City::inRandomOrder()->first->id,
             'terminal_id' => Terminal::inRandomOrder()->first->id,

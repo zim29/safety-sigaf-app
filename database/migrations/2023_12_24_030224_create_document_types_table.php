@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('regex', 50);
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('creator_id');
+            $table->unsignedBigInteger('creator_id')->nullable();
             $table->unsignedBigInteger('updater_id')->nullable();
             $table->unsignedBigInteger('deleter_id')->nullable();
 

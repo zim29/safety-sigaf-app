@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Country extends Model
+class State extends Model
 {
+    
     use SoftDeletes;
 
     /**
@@ -20,7 +21,7 @@ class Country extends Model
 
     protected $fillable = [
         'name',
-        'code',
+        'country_code'
         'creator_id',
         'updater_id',
         'deleter_id',
@@ -69,9 +70,8 @@ class Country extends Model
         return $this->belongsTo( User::class, 'deleter_id' );
     }
 
-    public function states () : HasMany
+    public function country () : BelongsTo 
     {
-        return $this->hasMany( State::class, 'country_code', 'code' );
+        return $this->belongsTo( Country::class, 'country_code', 'code' );
     }
-
 }
