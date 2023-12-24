@@ -50,6 +50,17 @@ return new class extends Migration
      */
     public function down(): void
     {
+
+        Schema::table( 'document_types', function ( Blueprint $table ) {
+            $table->dropForeign(['creator_id']);
+            $table->dropForeign(['updater_id']);
+            $table->dropForeign(['deleter_id']);
+        });
+
+        Schema::table( 'users', function ( Blueprint $table ) {
+            $table->dropForeign(['document_type_id']);
+        });
+
         Schema::dropIfExists('document_types');
     }
 };
