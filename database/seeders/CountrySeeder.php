@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use App\Models\Country;
+Use Illuminate\Support\Facades\DB;
 
 class CountrySeeder extends Seeder
 {
@@ -15,14 +14,13 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        $countries = [
-            ['name' => 'Colombia', 'code' => 'CO'],
-            ['name' => 'República Dominicana', 'code' => 'DO'],
-
-        ];
+        $countriesJson = file_get_contents(base_path('database/seeders/countries.json'));
+        $countries = json_decode($countriesJson);
 
         foreach ($countries as $country) {
-            Country::create($country);
+            DB::insert('INSERT INTO `countries` (`id`, `name`, `code`) 
+                            VALUES (?, ?, ?)',
+                            [$country->id, $country->name, $country->iso2]);
         }
     }
 }

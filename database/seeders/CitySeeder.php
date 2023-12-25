@@ -15,18 +15,13 @@ class CitySeeder extends Seeder
      */
     public function run(): void
     {
-        $cities = [
-            ['name' => 'Medellín', 'state_id' => State::inRandomOrder()->first()->id],
-            ['name' => 'Vasconia', 'state_id' => State::inRandomOrder()->first()->id],
-            ['name' => 'Boyacá', 'state_id' => State::inRandomOrder()->first()->id],
-            ['name' => 'San Pedro de Macorís', 'state_id' => State::inRandomOrder()->first()->id],
-            ['name' => 'San Isidrio', 'state_id' => State::inRandomOrder()->first()->id],
-            ['name' => 'Santo Domingo', 'state_id' => State::inRandomOrder()->first()->id],
+        $citiesJson = file_get_contents(base_path('database/seeders/cities.json'));
+        $cities = json_decode($citiesJson);
 
-        ];
-
-        foreach ($cities as $city) {
-            City::create($city);
+        foreach ($cities as $key => $city) {
+            DB::insert('INSERT INTO `cities` (`id`, `name`, `state_id`) 
+                            VALUES (?, ?, ?)',
+                            [$city->id, $city->name, $city->state_id]);
         }
     }
 }

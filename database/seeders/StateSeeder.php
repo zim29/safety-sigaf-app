@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-use App\Models\State;
 
 class StateSeeder extends Seeder
 {
@@ -14,18 +14,13 @@ class StateSeeder extends Seeder
      */
     public function run(): void
     {
-        $states = [
-            ['name' => 'Medellín', 'country_code' => 'CO'],
-            ['name' => 'Vasconia', 'country_code' => 'CO'],
-            ['name' => 'Boyacá', 'country_code' => 'CO'],
-            ['name' => 'San Pedro de Macorís', 'country_code' => 'dO'],
-            ['name' => 'San Isidrio', 'country_code' => 'do'],
-            ['name' => 'Santo Domingo', 'country_code' => 'do'],
-
-        ];
+        $statesJson = file_get_contents(base_path('database/seeders/states.json'));
+        $states = json_decode($statesJson);
 
         foreach ($states as $state) {
-            State::create($state);
+            DB::insert('INSERT INTO `states` (`id`, `name`, `country_code`) 
+                            VALUES (?, ?, ?)',
+                            [$state->id, $state->name, $state->country_code]);
         }
     }
 }
