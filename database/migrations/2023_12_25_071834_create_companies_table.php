@@ -13,7 +13,29 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 50)->unique();
+            $table->enum('type', ['security', 'contractor']);
+            $table->string('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            $table->unsignedBigInteger('creator_id')->nullable();
+            $table->unsignedBigInteger('updater_id')->nullable();
+            $table->unsignedBigInteger('deleter_id')->nullable();
+            
+            $table->foreign('creator_id')
+                        ->on('users')
+                        ->references('id')
+                        ->restrictOnDelete();
+
+            $table->foreign('updater_id')
+                        ->on('users')
+                        ->references('id')
+                        ->restrictOnDelete();
+
+            $table->foreign('deleter_id')
+                        ->on('users')
+                        ->references('id')
+                        ->restrictOnDelete();
         });
     }
 
