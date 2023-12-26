@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Livewire\Login;
+use App\Livewire\Register;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +18,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware([
+    'unauth'
+])->group( function () {
+    Route::get('login', Login::class)->name('login');
+    Route::get('register', Register::class)->name('register');
+});
+
+Route::middleware([
+    'auth'
+])->group( function () {
+    Route::get('dashboard', function () {
+        return view( 'welcome' );
+    })->name('dashboard');
 });

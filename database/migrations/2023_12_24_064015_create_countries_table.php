@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->char('code', 2)->unique();
-            $table->string('name', 50)->unique();
+            $table->string('name', 100)->unique();
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('creator_id')->nullable();

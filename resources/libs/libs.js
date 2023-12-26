@@ -1,0 +1,1 @@
+import './@popperjs/core/umd/popper.min.js';

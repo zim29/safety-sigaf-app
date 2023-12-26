@@ -73,8 +73,8 @@ class UserFactory extends Factory
             'em_co_phone' => fake()->unique()->e164PhoneNumber(),
             'allergies' => fake()->randomElement($allergies),
             'blood_type_id' => BloodType::inRandomOrder()->first()->id,
-            'city_id' => City::inRandomOrder()->first->id,
-            'terminal_id' => Terminal::inRandomOrder()->first->id,
+            'city_id' => City::inRandomOrder()->first()->id,
+            'c_terminal_id' => Terminal::inRandomOrder()->first()->id,
         ];
     }
 
