@@ -30,7 +30,12 @@ Route::middleware([
 Route::middleware([
     'auth'
 ])->group( function () {
-    Route::get('dashboard', function () {
+    Route::get('dashboard', function () {     
         return view( 'welcome' );
     })->name('dashboard');
+
+    Route::get('logout', function () {
+        \Auth::logout();
+        return view( 'welcome' );
+    });
 });
