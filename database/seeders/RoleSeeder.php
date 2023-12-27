@@ -19,6 +19,8 @@ class RoleSeeder extends Seeder
             ['name' => 'Security supervisor'],
             ['name' => 'Guardian'],
             ['name' => 'Manager'],
+            ['name' => 'Risk Profession'],
+            ['name' => 'Carnetization'],
             ['name' => 'Employee'],
             ['name' => 'Visitor'],
         ]
