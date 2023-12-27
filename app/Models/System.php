@@ -20,6 +20,7 @@ class System extends Model
 
     protected $fillable = [
         'name',
+        'company_id',
         'creator_id',
         'updater_id',
         'deleter_id',
@@ -59,6 +60,11 @@ class System extends Model
     public function deleter () : BelongsTo
     {
         return $this->belongsTo( User::class, 'deleter_id' );
+    }
+
+    public function company () : BelongsTo
+    {
+        return $this->belongsTo( Company::class );
     }
 
 }
