@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('systems', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50)->unique();
+            $table->unsignedBigInteger('company_id')->unique();
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('creator_id')->nullable();

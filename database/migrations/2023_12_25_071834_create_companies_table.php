@@ -37,6 +37,13 @@ return new class extends Migration
                         ->references('id')
                         ->restrictOnDelete();
         });
+
+        Schema::table('systems', function (Blueprint $table) {
+            $table->foreign('company_id')
+                    ->on('companies')
+                    ->references('id')
+                    ->restrictOnDelete();
+        });
     }
 
     /**
@@ -44,6 +51,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('systems', function (Blueprint $table) {
+            $table->dropForeign(['company_id']);
+        });
         Schema::dropIfExists('companies');
     }
 };
