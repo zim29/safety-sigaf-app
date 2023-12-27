@@ -35,7 +35,9 @@ class UserSeeder extends Seeder
             'blood_type_id' => \App\Models\BloodType::inRandomOrder()->first()->id,
             'city_id' => \App\Models\City::inRandomOrder()->first()->id,
         ];
+        
         User::create($adminUser);
-        User::factory(300)->create();
+        User::factory(200)->create();
+        User::factory(50)->unverified()->create();
     }
 }
