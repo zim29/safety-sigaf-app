@@ -13,7 +13,15 @@ class VehiclePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        $allowedRoles = [
+            'Coordinator',
+            'Administrative',
+            'Head of area',
+            'Manager',
+        ];
+
+        if( $user->is($allowedRoles) ) return true;
+        else return false;
     }
 
     /**
@@ -21,7 +29,15 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle): bool
     {
-        //
+        $allowedRoles = [
+            'Coordinator',
+            'Administrative',
+            'Head of area',
+            'Manager',
+        ];
+        
+        return $user->is($allowedRoles);
+
     }
 
     /**
@@ -29,7 +45,14 @@ class VehiclePolicy
      */
     public function create(User $user): bool
     {
-        //
+        $allowedRoles = [
+            'Coordinator',
+            'Administrative',
+            'Head of area',
+            'Manager',
+        ];
+        
+        return $user->is($allowedRoles);
     }
 
     /**
@@ -37,7 +60,23 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle): bool
     {
-        //
+        return $vehicle->belongsToCompany( $user->manegableCompanies() );
+    }
+
+    /**
+     * Determine whether the user can make access request to the models.
+     */
+    public function makeRequest(User $user, Vehicle $vehicle): bool
+    {
+        return $vehicle->belongsToCompany( $user->manegableCompanies() );
+    }
+
+    /**
+     * Determine whether the user can see sidenav menu option.
+     */
+    public function showMenu ( User $user ) : bool
+    {
+        return $this->create($user) || $this->viewAny($user);
     }
 
     /**
@@ -45,7 +84,7 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +92,7 @@ class VehiclePolicy
      */
     public function restore(User $user, Vehicle $vehicle): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +100,6 @@ class VehiclePolicy
      */
     public function forceDelete(User $user, Vehicle $vehicle): bool
     {
-        //
+        return false;
     }
 }
