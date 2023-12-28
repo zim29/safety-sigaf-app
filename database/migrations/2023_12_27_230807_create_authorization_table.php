@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('authorizations', function (Blueprint $table) {
             $table->uuid()->primary();
             $table->foreignId('user_id')->constrained()->restrictOnDelete();
-            $table->enum('type', ['User Access', 'Vehicle Access', 'Add Blacklist', 'Remove Blacklist']);
+            $table->enum('type', ['User Access', 'Vehicle Access', 'Blacklist']);
             $table->timestamp('created_at')->useCurrent();
         });
     }

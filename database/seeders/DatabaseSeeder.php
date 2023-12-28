@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BrigadeSeeder::class);
         $this->call(GenderSeeder::class);
         $this->call(BloodTypeSeeder::class);
+        $this->call(CompanySeeder::class);
         $this->call(StationSeeder::class);
         $this->call(SystemSeeder::class);
         $this->call(TerminalSeeder::class);
