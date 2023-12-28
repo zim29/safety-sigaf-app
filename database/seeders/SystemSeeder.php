@@ -15,8 +15,8 @@ class SystemSeeder extends Seeder
     public function run(): void
     {
         $systems = [
-                ['name' => 'ODC',],
-                ['name' => 'OCSENSA', ],
+                ['name' => 'ODC', 'company_id' = \App\Models\Company::inRandomOrder()->first()->id, ],
+                ['name' => 'OCSENSA',  'company_id' = \App\Models\Company::inRandomOrder()->first()->id, ],
             ];
 
         foreach ($systems as $key => $system) {
