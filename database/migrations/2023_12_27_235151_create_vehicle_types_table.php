@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('vehicle_types', function (Blueprint $table) {
             $table->id();
-            $table->string('placard', 10)->unique();
-            $table->string('t_placard', 10)->unique()->comment('Trailer Placard');
-            $table->foreignId('color_id')->constrained()->restrictOnDelete();
-            $table->foreignId('vehicle_type_id');
-            $table->foreignId('vehicle_brand_id')->constrained()->restrictOnDelete();
-            $table->foreignId('company_id')->constrained()->restrictOnDelete();
-            $table->string('model', 30);
+            $table->string('name', 50);
             $table->timestamps();
             $table->softDeletes();
             $table->foreignId('creator_id')->nullable()->constrained(table: 'users')->restrictOnDelete();
             $table->foreignId('updater_id')->nullable()->constrained(table: 'users')->restrictOnDelete();
             $table->foreignId('deleter_id')->nullable()->constrained(table: 'users')->restrictOnDelete();
+        });
 
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->foreign('vehicle_type_id')
+                    ->on('vehicle_types')
+                    ->references('id')
+                    ->restrictOnDelete();
         });
     }
 
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicles');
+        Schema::dropIfExists('vehicle_types');
     }
 };
