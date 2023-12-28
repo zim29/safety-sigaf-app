@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Livewire\Login;
 use App\Livewire\Register;
+use App\Livewire\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Livewire\Register;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware([
     'unauth'
@@ -30,12 +31,16 @@ Route::middleware([
 Route::middleware([
     'auth'
 ])->group( function () {
-    Route::get('dashboard', function () {     
-        return view( 'welcome' );
-    })->name('dashboard');
+    Route::get('dashboard', Dashboard::class)->name('dashboard');
 
-    Route::get('logout', function () {
+    Route::get('user-profile/{id}', function () {
         \Auth::logout();
         return view( 'welcome' );
-    });
+    })->name('user-profile');
+
+    Route::post('logout', function () {
+        \Auth::logout();
+        return redirect()->route( 'home' );
+    })->name('logout');
+
 });

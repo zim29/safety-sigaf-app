@@ -118,5 +118,28 @@ class User extends Authenticatable
     }
 
 
+    //Custom functions
+
+    /**
+     * Check if the user has any of the specified roles in any company.
+     *
+     * This function takes an array of roles as a parameter and checks if the user
+     * has any of these roles in any company.
+     *
+     * @param array $roles An array of roles to check for.
+     *
+     * @return bool Returns true if the user has any of the specified roles in any company,
+     *              otherwise returns false.
+     */
+    public function hasRole (array $roles) : bool
+    {
+        $contracts = ContractInformation::select('role_id')->where('user_id', $this->id)->pluck('role_id')->toArray();
+
+        $roles = Role::whereIn('id', $contracts)->get();
+
+        return (bool) $roles;
+    }
+
+
 
 }

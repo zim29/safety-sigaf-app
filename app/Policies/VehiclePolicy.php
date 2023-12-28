@@ -20,7 +20,7 @@ class VehiclePolicy
             'Manager',
         ];
 
-        if( $user->is($allowedRoles) ) return true;
+        if( $user->hasRole($allowedRoles) ) return true;
         else return false;
     }
 
@@ -36,7 +36,7 @@ class VehiclePolicy
             'Manager',
         ];
         
-        return $user->is($allowedRoles);
+        return $user->hasRole($allowedRoles);
 
     }
 
@@ -52,7 +52,7 @@ class VehiclePolicy
             'Manager',
         ];
         
-        return $user->is($allowedRoles);
+        return $user->hasRole($allowedRoles);
     }
 
     /**

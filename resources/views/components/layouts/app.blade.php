@@ -237,7 +237,7 @@
         </header>
         <!-- /app-header -->
         
-        @include('layouts.includes.sidenav')
+        @include('components.layouts.sidenav')
 
         <!-- Start::app-content -->
         <div class="main-content app-content">
@@ -265,7 +265,7 @@
     </div>
     <div id="responsive-overlay"></div>
 
-    <livewire:error-message />
+    {{-- <livewire:error-message /> --}}
     {{-- <livewire:chat-bot /> --}}
 
     @livewireScripts
