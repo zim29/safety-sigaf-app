@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ class Vehicle extends Model
 {
     
     
-    use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +25,7 @@ class Vehicle extends Model
         't_placard',
         'color_id',
         'vehicle_brand_id',
+        'vehicle_type_id',
         'company_id',
         'model',
         'creator_id',
@@ -38,10 +40,17 @@ class Vehicle extends Model
      *  
      * */
 
-    protected function name () : Attribute 
+    protected function placard () : Attribute 
     {
         return Attribute::make(
-            set: fn ( string $value ) => ucwords( strtolower($value) ),
+            set: fn ( string $value ) => strtoupper($value) ,
+        );
+    } 
+
+    protected function tPlacard () : Attribute 
+    {
+        return Attribute::make(
+            set: fn ( string | null $value ) => $value ? strtoupper($value) : null,
         );
     } 
 

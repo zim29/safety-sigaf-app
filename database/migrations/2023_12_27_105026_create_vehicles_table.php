@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('placard', 10)->unique();
-            $table->string('t_placard', 10)->unique()->comment('Trailer Placard');
+            $table->string('t_placard', 10)->nullable()->unique()->comment('Trailer Placard');
             $table->foreignId('color_id')->constrained()->restrictOnDelete();
             $table->foreignId('vehicle_type_id');
             $table->foreignId('vehicle_brand_id')->constrained()->restrictOnDelete();

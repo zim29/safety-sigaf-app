@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(StateSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(DocumentTypeSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(PositionSeeder::class);
         $this->call(ProfessionSeeder::class);
         $this->call(BrigadeSeeder::class);
         $this->call(GenderSeeder::class);
@@ -26,12 +28,12 @@ class DatabaseSeeder extends Seeder
         $this->call(SystemSeeder::class);
         $this->call(TerminalSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(ColorSeeder::class);
+        $this->call(VehicleTypeSeeder::class);
+        $this->call(VehicleBrandSeeder::class);
+        $this->call(VehicleSeeder::class);
+        $this->call(ContractInformationSeeder::class);
+        $this->call(UserAccessSeeder::class);
 
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

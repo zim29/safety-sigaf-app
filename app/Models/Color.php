@@ -61,4 +61,12 @@ class Color extends Model
     {
         return $this->belongsTo( User::class, 'deleter_id' );
     }
+
+    //Custom Functions
+
+    public static function list () : array 
+    {
+        return Color::select('id', 'name')->get()->toArray();
+    }
+
 }

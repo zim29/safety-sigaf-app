@@ -17,24 +17,9 @@ return new class extends Migration
             $table->string('regex', 50);
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('creator_id')->nullable();
-            $table->unsignedBigInteger('updater_id')->nullable();
-            $table->unsignedBigInteger('deleter_id')->nullable();
-
-            $table->foreign('creator_id')
-                        ->on('users')
-                        ->references('id')
-                        ->restrictOnDelete();
-
-            $table->foreign('updater_id')
-                        ->on('users')
-                        ->references('id')
-                        ->restrictOnDelete();
-
-            $table->foreign('deleter_id')
-                        ->on('users')
-                        ->references('id')
-                        ->restrictOnDelete();
+            $table->foreignId('creator_id')->nullable()->constrained( table: 'users');
+            $table->foreignId('updater_id')->nullable()->constrained( table: 'users');
+            $table->foreignId('deleter_id')->nullable()->constrained( table: 'users');
         });
 
         Schema::table( 'users', function ( Blueprint $table ) {
@@ -50,12 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-
-        Schema::table( 'document_types', function ( Blueprint $table ) {
-            $table->dropForeign(['creator_id']);
-            $table->dropForeign(['updater_id']);
-            $table->dropForeign(['deleter_id']);
-        });
 
         Schema::table( 'users', function ( Blueprint $table ) {
             $table->dropForeign(['document_type_id']);

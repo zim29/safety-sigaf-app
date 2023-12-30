@@ -265,7 +265,7 @@
     </div>
     <div id="responsive-overlay"></div>
 
-    {{-- <livewire:error-message /> --}}
+    <livewire:alert />
     {{-- <livewire:chat-bot /> --}}
 
     @livewireScripts

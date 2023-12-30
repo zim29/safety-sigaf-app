@@ -6,6 +6,8 @@ use App\Livewire\Login;
 use App\Livewire\Register;
 use App\Livewire\Dashboard;
 
+use App\Livewire\CreateVehicle;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +34,18 @@ Route::middleware([
     'auth'
 ])->group( function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
+
+
+
+    //Start Vehicle Section
+
+
+    Route::get('create-vehicle', CreateVehicle::class)->name('create-vehicle');
+
+
+    //End Vehicle Section
+
+
 
     Route::get('user-profile/{id}', function () {
         \Auth::logout();

@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contract_information', function (Blueprint $table) {
+        Schema::create('user_access', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->restrictOnDelete();
+            $table->foreignId('role_id')->constrained()->restrictOnDelete();
             $table->foreignId('company_id')->constrained()->restrictOnDelete();
-            $table->foreignId('position_id');
+            $table->date('from');
+            $table->date('until');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contract_information');
+        Schema::dropIfExists('user_access');
     }
 };

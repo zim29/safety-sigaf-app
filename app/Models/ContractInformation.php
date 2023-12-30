@@ -17,7 +17,6 @@ class ContractInformation extends Model
     protected $fillable = [
         'user_id',
         'position_id',
-        'role_id',
         'company_id',
     ];
 

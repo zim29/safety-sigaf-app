@@ -126,6 +126,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'appexeceptions' => [
+            'driver' => 'daily',
+            'channels' => ['syslog'],
+            'path' => storage_path('logs/appexeceptions.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];

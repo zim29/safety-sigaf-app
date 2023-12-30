@@ -61,4 +61,12 @@ class VehicleBrand extends Model
         return $this->belongsTo( User::class, 'deleter_id' );
     }
 
+
+    //Custom Functions
+
+    public static function list () : array 
+    {
+        return VehicleBrand::select('id', 'name')->get()->toArray();
+    }
+
 }

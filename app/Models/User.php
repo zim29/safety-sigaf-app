@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 use Carbon;
 
@@ -68,6 +69,13 @@ class User extends Authenticatable
      *  
      *  
      * */
+
+    protected function fullname () : Attribute 
+    {
+        return Attribute::make(
+            get: fn ( ) => "$this->name $this->surname",
+        );
+    } 
 
     protected function name () : Attribute 
     {
@@ -133,11 +141,43 @@ class User extends Authenticatable
      */
     public function hasRole (array $roles) : bool
     {
-        $contracts = ContractInformation::select('role_id')->where('user_id', $this->id)->pluck('role_id')->toArray();
 
-        $roles = Role::whereIn('id', $contracts)->get();
+        $roleList = Role::whereIn('name', $roles)->pluck('id')->toArray();
+        
+        $contracts = UserAccess::getCurrentUserRoles($this->id)->pluck('role_id')->toArray();
 
-        return (bool) $roles;
+        $hasRoles = (bool) array_intersect($roleList, $contracts);
+
+
+        return $hasRoles;
+    }
+
+
+    /**
+     * Get all companies a user can manage.
+     *
+     *
+     *
+     * @return Illuminate\Database\Eloquent\Builder 
+     * 
+     */
+    public function getManegableCompanies () : Builder
+    {
+        $allowedRoles = [
+            'Coordinator',
+            'Administrative',
+            'Head of area',
+            'Manager',
+        ];
+
+        $roles = Role::select('id')->whereIn('name', $allowedRoles)->get()->toArray();
+
+        $companiesID = UserAccess::where('user_id', $this->id)
+                                            ->whereIn('role_id', $roles)
+                                            ->pluck('company_id');
+        $companies = Company::whereIn('id', $companiesID);
+
+        return $companies;
     }
 
 
