@@ -59,6 +59,10 @@
             transform: scale(1.2)
         }
 
+        [sortable] {
+            cursor: pointer;
+        }
+
         
     </style>
 
