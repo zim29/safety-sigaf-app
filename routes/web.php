@@ -7,6 +7,7 @@ use App\Livewire\Register;
 use App\Livewire\Dashboard;
 
 use App\Livewire\CreateVehicle;
+use App\Livewire\ViewAnyVehicle;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::middleware([
 
 
     Route::get('create-vehicle', CreateVehicle::class)->name('create-vehicle');
+    Route::get('list-vehicles', ViewAnyVehicle::class)->name('viewAny-vehicle');
 
 
     //End Vehicle Section

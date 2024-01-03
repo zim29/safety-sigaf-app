@@ -33,6 +33,7 @@ class Vehicle extends Model
         'deleter_id',
     ];
 
+
     /**
      * 
      *  Mutators and Accessors
@@ -78,17 +79,22 @@ class Vehicle extends Model
 
     public function company () : BelongsTo
     {
-        return $this->belongsTo( Company::class );
+        return $this->belongsTo( Company::class, 'company_id' );
     }
 
     public function brand () : BelongsTo
     {
-        return $this->belongsTo( VehicleBrand::class );
+        return $this->belongsTo( VehicleBrand::class, 'vehicle_brand_id' );
+    }
+
+    public function type () : BelongsTo
+    {
+        return $this->belongsTo( VehicleType::class, 'vehicle_type_id' );
     }
 
     public function color () : BelongsTo
     {
-        return $this->belongsTo( Color::class );
+        return $this->belongsTo( Color::class, 'color_id' );
     }
 
 }

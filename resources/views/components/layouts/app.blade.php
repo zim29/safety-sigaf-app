@@ -63,6 +63,37 @@
             cursor: pointer;
         }
 
+        .spinner {
+            position: fixed; /* or absolute */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+        }
+
+        /* Simple spinner animation */
+        .spinner::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            border-color: blue transparent blue transparent;
+            animation: spinner 1.2s linear infinite;
+            z-index: 100;
+        }
+
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         
     </style>
 
@@ -73,7 +104,6 @@
 </head>
 
 <body>
-
 
     <div class="page">
         <!-- app-header -->
@@ -246,6 +276,8 @@
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid mt-3">
+                <div id="initial-loading-spinner" class="spinner" >
+                </div>
                 @yield('content')
                 {{ $slot }}
             </div>
@@ -307,8 +339,16 @@
     <!-- Chartjs Chart JS -->
     <script src="{!! asset('assets/libs/chart.js/chart.min.js') !!}"></script>
 
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            document.getElementById('initial-loading-spinner').style.display = 'none';
+        });
+    </script>
+
     <script type="text/javascript">
         'use strict';
+
+
 
         /**
          * Validates input field using regEx

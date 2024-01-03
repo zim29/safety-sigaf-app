@@ -77,9 +77,9 @@
                                 </li>
                             @endcan
 
-                            @can('list', \App\Models\Vehicle::class)
+                            @can('viewAny', \App\Models\Vehicle::class)
                                 <li class="slide">
-                                    {{-- <a href="{{ route('list-vehicles') }}" class="side-menu__item">{!! __('Listar') !!}</a> --}}
+                                    <a href="{{ route('viewAny-vehicle') }}" class="side-menu__item">{!! __('Listar') !!}</a>
                                 </li>
                             @endcan
                             
