@@ -63,16 +63,23 @@
             cursor: pointer;
         }
 
-        .spinner {
+        .spinner, .offline {
             position: fixed; /* or absolute */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 100;
+            z-index: 1000;
+            width:100vw;
+            height :100vh;
+            background-color: rgba(0,0,0,.9);
         }
 
         /* Simple spinner animation */
         .spinner::after {
+            position: fixed; /* or absolute */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             content: '';
             display: block;
             width: 40px;
@@ -82,8 +89,15 @@
             border: 6px solid #fff;
             border-color: blue transparent blue transparent;
             animation: spinner 1.2s linear infinite;
-            z-index: 100;
         }
+
+        .offline {
+            text-align: center;
+            color: red;
+            padding-top: 50vh;
+            font-size: 20px;
+        }
+
 
         @keyframes spinner {
             0% {
@@ -104,7 +118,7 @@
 </head>
 
 <body>
-
+    
     <div class="page">
         <!-- app-header -->
         <header class="app-header" style="z-index: 100;">
