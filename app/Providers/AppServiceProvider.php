@@ -21,6 +21,61 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Builder::macro('search', function( string $searchType, string $searchField, string $searchValue ) { 
+
+            if( $searchValue === '' || $searchField === '' )
+            {
+                $query = $this;
+            }
+            else if ( str_contains($searchField, '.') )
+            {
+                [$relation, $relationField] = explode('.', $searchField);
+                $query = $this->whereHas($relation, function( $subQuery ) use( $relationField, $searchValue, $searchType ) {
+                    switch ($searchType) {
+                        case 'startsWith':
+                            $subQuery->where($relationField, 'like', "$searchValue%");
+                            break;
+                        case 'endsWith':
+                            $subQuery->where($relationField, 'like', "%$searchValue");
+                            break;
+                        case 'contains':
+                            $subQuery->where($relationField, 'like', "%$searchValue%");
+                            break;
+                        case 'exactMatch':
+                            $subQuery->where($relationField, $searchValue);
+                            break;
+                        
+                        default:
+
+                            break;
+                    }
+                });
+            }
+            else
+            {
+                switch ($searchType) {
+                    case 'startsWith':
+                        $query = $this->where($searchField, 'like', "$searchValue%");
+                        break;
+                    case 'endsWith':
+                        $query = $this->where($searchField, 'like', "%$searchValue");
+                        break;
+                    case 'contains':
+                        $query = $this->where($searchField, 'like', "%$searchValue%");
+                        break;
+                    case 'exactMatch':
+                        $query = $this->where($searchField, $searchValue);
+                        break;
+                    
+                    default:
+                        $query = $this;
+                       
+                }
+            }
+
+            return $query;
+        });
+
         Builder::macro('sortBy', function( string | null $field, string $sortDirection ) { 
 
             if( $field === null )
