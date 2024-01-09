@@ -8,7 +8,7 @@
 
     <!-- Start::row-1 -->
     <div class="row">
-        <div class="col-xxl-4 col-xl-12">
+        <div class="col-xl-12">
             <div class="card custom-card overflow-hidden">
                 <div class="card-body p-0">
                     <div class="d-sm-flex align-items-top p-4 border-bottom border-block-end-dashed main-profile-cover">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xxl-8 col-xl-12">
+        <div class="col-xl-12">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card custom-card">
