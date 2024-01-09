@@ -74,4 +74,9 @@ class State extends Model
     {
         return $this->belongsTo( Country::class, 'country_code', 'code' );
     }
+
+    public function cities () : HasMany 
+    {
+        return $this->hasMany( City::class );
+    }
 }

@@ -24,7 +24,7 @@
 
 
                 <!-- Start::slide User-->
-                @can('manage', \App\Models\User::class)
+                @can('showMenu', \App\Models\User::class)
                     <li class="slide has-sub">
                         <a href="javascript:void(0);" class="side-menu__item">
                             <i class="bx bx-user side-menu__icon"></i>
@@ -33,9 +33,9 @@
                         </a>
                         <ul class="slide-menu child1">
 
-                            @can('invite', \App\Models\User::class)
+                            @can('create', \App\Models\User::class)
                             <li class="slide">
-                                <a href="{{ route('create-user') }}" class="side-menu__item">{!! __('Invitar usuario') !!}</a>
+                                <a href="{{ route('invite-user') }}" class="side-menu__item">{!! __('Invitar usuario') !!}</a>
                             </li>
                             @endcan
 

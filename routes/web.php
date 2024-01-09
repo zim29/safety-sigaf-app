@@ -15,6 +15,7 @@ use App\Livewire\ViewVehicleTransferRequest;
 
 
 use App\Livewire\UserProfile;
+use App\Livewire\InviteUser;
 
 
 /*
@@ -36,7 +37,7 @@ Route::middleware([
     'unauth'
 ])->group( function () {
     Route::get('login', Login::class)->name('login');
-    Route::get('register', Register::class)->name('register');
+    Route::get('register/{userData?}', Register::class)->name('register');
 });
 
 Route::middleware([
@@ -65,11 +66,12 @@ Route::middleware([
     //Start User Section
 
     Route::get('user/{id}/profile', UserProfile::class)->name('user-profile');
+    Route::get('user/invite', InviteUser::class)->name('invite-user');
 
     //End User Section
 
 
-    Route::post('logout', function () {
+    Route::get('logout', function () {
         \Auth::logout();
         return redirect()->route( 'home' );
     })->name('logout');

@@ -30,7 +30,7 @@ class Notification extends Model
 
             $userId = $notification->user_id;
 
-            event(new NotificationEvent($userId));
+            // event(new NotificationEvent($userId));
             
             Mail::to(User::find($userId)->email)->send(new NotificationMail($notification));       
 

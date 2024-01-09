@@ -10,6 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\NewUserInvitation;
 
 use App\Traits\HasTokenApp;
 
@@ -204,6 +207,15 @@ class User extends Authenticatable
     {
 
         return $this->getManegableCompanies()->pluck('id')->toArray();
+    }
+
+
+    public static function invite ( array $userData ) : void
+    {
+        $data = http_build_query($userData);
+        Mail::to($userData['email'])->send(new NewUserInvitation($data));  
+
+
     }
 
 
