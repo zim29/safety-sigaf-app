@@ -12,7 +12,7 @@
     <title> {{ config('app.name') }} | {{ __($title  ?? '') }} </title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/images/brand-logos/bypaulBrand.jpg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/brand-logos/bypaul.jpg') }}" type="image/x-icon">
 
     <!-- Main Theme Js -->
     <script src="{!! asset('assets/js/main.js') !!}"></script>
@@ -189,10 +189,7 @@
                         <!-- End::header-link|dropdown-toggle -->
                         <ul class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end" aria-labelledby="mainHeaderProfile">
                             <li><a class="dropdown-item d-flex" href="{!! route('user-profile', Auth::user()) !!}"><i class="ti ti-user-circle fs-18 me-2 op-7"></i>{!! __('Perfíl') !!}</a></li>
-                            <form action="{!! route('logout') !!}" method="POST">
-                                @csrf
-                                <li><button type="submit" class="dropdown-item d-flex" href="sign-in-cover.html"><i class="ti ti-logout fs-18 me-2 op-7"></i>{!! __('Cerrar Sessión') !!}</button></li>
-                            </form>
+                            <li><a type="submit" class="dropdown-item d-flex" href="{{ route('logout') }}"><i class="ti ti-logout fs-18 me-2 op-7"></i>{!! __('Cerrar Sessión') !!}</a></li>
                         </ul>
                     </div>  
                     <!-- End::header-element -->
