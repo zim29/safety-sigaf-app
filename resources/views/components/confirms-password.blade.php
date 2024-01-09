@@ -1,4 +1,4 @@
-@props(['title' => __('Confirm Password'), 'content' => __('For your security, please confirm your password to continue.'), 'button' => __('Confirm')])
+@props(['title' => __('Confirm Password'), 'content' => __('Por motivos de seguridad. Por favor confirme su contraseña'), 'button' => __('Confirmar')])
 
 @php
     $confirmableId = md5($attributes->wire('then'));
@@ -44,7 +44,7 @@
     <x-slot name="footer">
         <div class="vstack gap-1">
             <button class="btn btn-warning w-100" wire:click="stopConfirmingPassword" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ __('Cancelar') }}
             </button>
 
             <button class="btn btn-success w-100" dusk="confirm-password-button" wire:click="confirmPassword" wire:loading.attr="disabled">
