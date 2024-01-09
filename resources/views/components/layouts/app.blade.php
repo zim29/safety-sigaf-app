@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="{!! asset('assets/libs/choices.js/public/assets/styles/choices.min.css') !!}">
 
     <style type="text/css">
+        [disabled] {
+            cursor: not-allowed;
+        }
         @media print {
             .no-print, header, aside {
                 display: none;
@@ -158,90 +161,7 @@
 
                 <!-- Start::header-content-right -->
                 <div class="header-content-right">
-                    <!-- Start::header-element -->
-                    <div class="header-element notifications-dropdown">
-                        <!-- Start::header-link|dropdown-toggle -->
-                        <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
-                            <i class="bx bx-bell header-link-icon"></i>
-                            <span class="badge bg-secondary rounded-pill header-icon-badge pulse pulse-secondary" id="notification-icon-badge">5</span>
-                        </a>
-                        <!-- End::header-link|dropdown-toggle -->
-                        <!-- Start::main-header-dropdown -->
-                        <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
-                            <div class="p-3">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="mb-0 fs-17 fw-semibold">Notificaciones</p>
-                                    <span class="badge bg-secondary-transparent" id="notifiation-data">3 Sin leer</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <ul class="list-unstyled mb-0" id="header-notification-scroll">
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                         <div class="pe-2">
-                                             <span class="avatar avatar-md bg-primary-transparent avatar-rounded"><i class="bx bx-user fs-18"></i></span>
-                                         </div>
-                                         <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-semibold"><a href="notifications.html">Solicitud de acceso a Vasconia-ODC</a></p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">Realizado por ByPaul</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                         </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                         <div class="pe-2">
-                                             <span class="avatar avatar-md bg-primary-transparent avatar-rounded"><i class="bx bx-user fs-18"></i></span>
-                                         </div>
-                                         <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-semibold"><a href="notifications.html">Solicitud de acceso a Vasconia-Ocsensa</a></p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">Realizado por CoyotePOS</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                         </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                         <div class="pe-2">
-                                             <span class="avatar avatar-md bg-primary-transparent avatar-rounded"><i class="bx bxs-truck fs-18"></i></span>
-                                         </div>
-                                         <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-semibold"><a href="notifications.html">Solicitud de acceso a Caucasi-ODC</a></p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">Realizado por Ecopetrol</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="p-3 empty-header-item1 border-top">
-                                <div class="d-grid">
-                                    <a href="notifications.html" class="btn btn-primary">Ver todo</a>
-                                </div>
-                            </div>
-                            <div class="p-5 empty-item1 d-none">
-                                <div class="text-center">
-                                    <span class="avatar avatar-xl avatar-rounded bg-secondary-transparent">
-                                        <i class="ri-notification-off-line fs-2"></i>
-                                    </span>
-                                    <h6 class="fw-semibold mt-3">No New Notifications</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End::main-header-dropdown -->
-                    </div>
-                    <!-- End::header-element -->
+                    @livewire('notification')
                     <!-- Start::header-element -->
                     <div class="header-element header-fullscreen">
                         <!-- Start::header-link -->
@@ -259,7 +179,7 @@
                         <a href="#" class="header-link dropdown-toggle" id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="me-sm-2 me-0">
-                                    <img src="{!! asset('storage/user/' . Auth::user()->id) !!}" onerror="this.src='{!! asset('assets/images/authentication/default-person.jfif')!!}';this.onerror='';" alt="{{__('Foto de perfíl de usuario')}}" width="32" height="32" class="rounded-circle">
+                                    <img src="{!! asset('storage/user/' . Auth::user()->id) !!}"  alt="{{__('Foto de perfíl de usuario')}}" width="32" height="32" class="rounded-circle">
                                 </div>
                                 <div class="d-sm-block d-none">
                                     <p class="fw-semibold mb-0 lh-1">{!! Auth::user()->fullname !!}</p>
@@ -359,6 +279,29 @@
         });
     </script>
 
+    <script>
+
+        function checkInternetSpeed () {
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+            if (connection) {
+                if (connection.downlink < .5) {
+                    // Conexión lenta detectada
+                    window.Livewire.dispatch('warning', {message: 'Conexión a Internet Lenta o Inestable Detectada. La eficiencia y estabilidad del sistema podrían verse comprometidas. Por favor, considera mejorar tu conexión para una experiencia óptima.'});
+                }
+                return true;
+            } else {
+                console.log('The Network Information API is not supported by this browser.');
+                return false;
+            }
+        }
+        document.addEventListener('livewire:initialized', () => {
+            if ( checkInternetSpeed() ) {
+                document.addEventListener('change', checkInternetSpeed); 
+            }
+        });
+    </script>
+
     <script type="text/javascript">
         'use strict';
 
@@ -382,15 +325,22 @@
             this.classList.remove('is-invalid');
         }
 
-        function playsound (url) {
+
+        function playsound ( ) {
             const audio = document.createElement('audio');
-             audio.src = url;
+             audio.src = "{{ asset('assets/sounds/notification.wav') }}";
              audio.play();
+             console.log(1);
         }
+
+        document.addEventListener('livewire:init', () => {
+               Livewire.on('notifications-updated', playsound);
+            });
+
 
 
         document.addEventListener('DOMContentLoaded', () => {
-            let inputs = document.querySelectorAll('input'); 
+            let inputs = document.querySelectorAll('input, select'); 
             inputs.forEach(input => input.addEventListener('keydown', removeIsInvalidClass));
         });
         

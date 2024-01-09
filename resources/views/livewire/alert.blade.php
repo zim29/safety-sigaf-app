@@ -38,7 +38,25 @@
             @this.on('show-alert', ( ) => {
                 bootstrap.Modal.getOrCreateInstance(document.getElementById('alert')).show();
                 document.getElementById('closeAlert').focus()
-            })
+            });
+
+            window.addEventListener('hidden.bs.modal', () => {
+                if(@this.type === 'success'){
+                    @this.dispatch('success-modal-closed')
+                    @this.type = null;
+                }
+
+                else if(@this.type === 'warning'){
+                    @this.dispatch('warning-modal-closed')
+                    @this.type = null;
+                }
+
+                else if(@this.type === 'error'){
+                    @this.dispatch('error-modal-closed')
+                    @this.type = null;
+                }
+            });
+
         })
     </script>
 @endpush

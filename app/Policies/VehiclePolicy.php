@@ -60,7 +60,7 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle): bool
     {
-        return $vehicle->belongsToCompany( $user->manegableCompanies() );
+        return $vehicle->isManegableByAuth();
     }
 
     /**
@@ -68,7 +68,7 @@ class VehiclePolicy
      */
     public function makeRequest(User $user, Vehicle $vehicle): bool
     {
-        return $vehicle->belongsToCompany( $user->manegableCompanies() );
+        return $vehicle->isManegableByAuth();
     }
 
     /**

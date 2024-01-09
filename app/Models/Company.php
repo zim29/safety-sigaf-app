@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
@@ -60,6 +61,31 @@ class Company extends Model
     public function deleter () : BelongsTo
     {
         return $this->belongsTo( User::class, 'deleter_id' );
+    }
+
+    //Custom functions
+
+    public function getManagers () : array
+    {
+        $managerRoles = [
+            'Coordinator',
+            'Administrative',
+            'Head of area',
+            'Manager',
+        ];
+
+        $rolesId = Role::select('id')
+                            ->whereIn('name', $managerRoles)
+                            ->get()
+                            ->toArray();
+
+        $users = UserAccess::select('user_id')
+                        ->where('company_id', $this->id)
+                        ->whereIn('role_id', $rolesId)
+                        ->pluck('user_id')
+                        ->toArray();
+
+        return $users;
     }
 
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('color_id')->constrained()->restrictOnDelete();
             $table->foreignId('vehicle_type_id');
             $table->foreignId('vehicle_brand_id')->constrained()->restrictOnDelete();
-            $table->foreignId('company_id')->constrained()->restrictOnDelete();
+            $table->foreignId('company_id')->nullable()->constrained()->restrictOnDelete();
             $table->string('model', 30);
             $table->timestamps();
             $table->softDeletes();

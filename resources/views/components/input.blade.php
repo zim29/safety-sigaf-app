@@ -15,6 +15,7 @@
         class="{{ $attributes['class'] ?? '' }} {{ $errors->has( $id ) ? 'is-invalid' : '' }}  form-control"
         tabindex="{{ $tabindex }}" 
         {{ $autofocus ? 'autofocus' : '' }}
+        {{ $disabled ? 'disabled' : '' }}
         {{$attributes}}
     />
     <label for="{{ $id }}">{{ __( $label )  }}</label>

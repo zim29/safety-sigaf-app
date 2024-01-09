@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Vehicle;
 use App\Models\VehicleBrand;
@@ -48,6 +49,7 @@ class CreateVehicle extends Component
 
     public function create () : void
     {
+        DB::beginTransaction();
 
         try {
 
@@ -60,6 +62,7 @@ class CreateVehicle extends Component
 
             if( $this->vehicle ) 
             {
+                DB::commit();
                 $this->form->image->storeAs('vehicle', $this->vehicle->id, 'public');
             }
 
@@ -78,6 +81,7 @@ class CreateVehicle extends Component
             
         } catch ( \Exception $e) {     
 
+            DB::rollback();
             $this->dispatch( 'error' );
             \Log::channel('appexeceptions')->error('Error creating vehicle',['user_id' => \Auth::id(), 
                                                                             'fullname' => \Auth::user()->fullname, 

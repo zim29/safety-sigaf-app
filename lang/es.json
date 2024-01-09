@@ -1,0 +1,7 @@
+{
+	"vehicle_trasnfer_request" : "Solicitud de traspaso de vehículo",
+	"in_process" : "En proceso",
+	"approved_by_user" : "Aprobado por usuario",
+	"rejected_by_user" : "Rechazado por usuario",
+	"rejected_by_system" : "Rechazado por el sistema"
+}

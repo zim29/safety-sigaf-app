@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use \Maatwebsite\Excel\Sheet;
+use App\Contracts\TokenAuthenticationProvider;  
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +24,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $tokenProvider = new TokenAuthenticationProvider;
+
+        $this->app->singleton('provider', function() use ($tokenProvider) {
+                return $tokenProvider;
+            });
+
+        \PhpOffice\PhpSpreadsheet\IOFactory::registerWriter('CustomPdf', \App\Helpers\CustomDompdf::class);
+        
+        Sheet::macro('styleCells', function (Sheet $sheet, string $cellRange, array $style) {
+            $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($style);
+        });
+
         Builder::macro('search', function( string $searchType, string $searchField, string $searchValue ) { 
 
             if( $searchValue === '' || $searchField === '' )
@@ -112,5 +127,6 @@ class AppServiceProvider extends ServiceProvider
 
             return $relationClassName;
         }
+
     }
 }

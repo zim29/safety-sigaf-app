@@ -11,11 +11,13 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
 
-use Carbon;
+use App\Traits\HasTokenApp;
+
+use \Carbon;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasTokenApp;
 
     /**
      * The attributes that are mass assignable.
@@ -125,6 +127,16 @@ class User extends Authenticatable
         return $this->belongsTo(DocumentType::class);
     }
 
+    public function profession () : BelongsTo
+    {
+        return $this->belongsTo(Profession::class);
+    }
+
+    public function city () : BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
 
     //Custom functions
 
@@ -178,6 +190,20 @@ class User extends Authenticatable
         $companies = Company::whereIn('id', $companiesID);
 
         return $companies;
+    }
+
+    /**
+     * Get array with all companies ids a user can manage.
+     *
+     *
+     *
+     * @return array 
+     * 
+     */
+    public function getManegableCompaniesArray () : array
+    {
+
+        return $this->getManegableCompanies()->pluck('id')->toArray();
     }
 
 

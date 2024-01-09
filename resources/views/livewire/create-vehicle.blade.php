@@ -1,5 +1,7 @@
 <div>
     <x-card title="Creación de vehículo">
+        <x-spinner></x-spinner>
+        <x-offline-alert></x-offline-alert>
         <form wire:submit="create" autocomplete="off">
             <div class="row">
                 {{-- vehicle placard --}}

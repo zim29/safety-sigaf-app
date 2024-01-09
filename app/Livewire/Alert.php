@@ -14,6 +14,7 @@ class Alert extends Component
     public string $color = '';
     public string $icon = '';
     public bool $center = true;
+    public string $type;
 
     #[On('error')]
     public function error (
@@ -32,6 +33,7 @@ class Alert extends Component
         $this->icon = $icon;
         $this->center = $center;
         $this->dispatch('show-alert');
+        $this->type = 'error';
     }
 
     #[On('warning')]
@@ -51,6 +53,7 @@ class Alert extends Component
         $this->icon = $icon;
         $this->center = $center;
         $this->dispatch('show-alert');
+        $this->type = 'warning';
     }
 
     #[On('success')]
@@ -70,6 +73,7 @@ class Alert extends Component
         $this->icon = $icon;
         $this->center = $center;
         $this->dispatch('show-alert');
+        $this->type = 'success';
     }
 
     #[On('unauthorized')]

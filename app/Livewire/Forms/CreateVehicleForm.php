@@ -5,8 +5,6 @@ namespace App\Livewire\Forms;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-use App\Model\Vehicle;
-
 class CreateVehicleForm extends Form
 {
 
@@ -29,7 +27,7 @@ class CreateVehicleForm extends Form
             'vehicle_type_id' => ['required', 'exists:vehicle_types,id', 'integer', ],
             'company_id' => ['required', 'exists:companies,id', 'integer', ],
             'model' => ['required', 'min:3', 'max:30', 'string', ],
-            'image' => ['required', ],
+            'image' => ['required', 'image', 'max:2048'],
         ];
     }
 

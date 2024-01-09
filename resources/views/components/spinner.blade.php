@@ -1,2 +1,2 @@
-<div wire:loading id="{{rand()}}" class="spinner" >
+<div wire:loading.delay.longer id="{{rand()}}" class="spinner" >
 </div>

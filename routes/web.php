@@ -8,6 +8,14 @@ use App\Livewire\Dashboard;
 
 use App\Livewire\CreateVehicle;
 use App\Livewire\ViewAnyVehicle;
+use App\Livewire\ViewVehicle;
+use App\Livewire\EditVehicle;
+
+use App\Livewire\ViewVehicleTransferRequest;
+
+
+use App\Livewire\UserProfile;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,16 +51,23 @@ Route::middleware([
 
     Route::get('create-vehicle', CreateVehicle::class)->name('create-vehicle');
     Route::get('list-vehicles', ViewAnyVehicle::class)->name('viewAny-vehicle');
+    Route::get('vehicle/{id}', ViewVehicle::class)->name('view-vehicle');
+    Route::get('vehicle/edit/{id}', EditVehicle::class)->name('edit-vehicle');
+    
+
+    Route::get('vehicle/transfer/{id}', ViewVehicleTransferRequest::class)->name('transfer-vehicle');
+
 
 
     //End Vehicle Section
 
 
+    //Start User Section
 
-    Route::get('user-profile/{id}', function () {
-        \Auth::logout();
-        return view( 'welcome' );
-    })->name('user-profile');
+    Route::get('user/{id}/profile', UserProfile::class)->name('user-profile');
+
+    //End User Section
+
 
     Route::post('logout', function () {
         \Auth::logout();
