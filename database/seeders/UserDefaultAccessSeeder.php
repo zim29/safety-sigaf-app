@@ -215,7 +215,7 @@ class UserDefaultAccessSeeder extends Seeder
 
         foreach ($users as $key => $user) {
             $createdUser = User::create($user);
-            $access = ['user_id' => $createdUser->id, 'role_id' => $key, 'company_id' => 1, 'from' => '2023-01-01', 'until' => '2024-12-01'];
+            $access = ['user_id' => $createdUser->id, 'role_id' => $key+1, 'company_id' => 1, 'from' => '2023-01-01', 'until' => '2024-12-01'];
             ContractInformation::create(['user_id' => $createdUser->id, 
                                             'position_id' => \App\Models\Position::inRandomOrder()->first()->id,
                                             'company_id' => 1,
