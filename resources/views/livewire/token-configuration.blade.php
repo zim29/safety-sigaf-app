@@ -20,9 +20,9 @@
                     <div class="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                         <p class="font-semibold">
                             @if ($showingConfirmation)
-                                {{ __('To finish enabling two factor authentication, scan the following QR code using your phone\'s authenticator application or enter the setup key and provide the generated OTP code.') }}
+                                {{ __('Para terminar de habilitar el token, escanee el siguiente código QR con la aplicación de autenticación de su teléfono o ingrese la clave de configuración y proporcione el código OTP generado.') }}
                             @else
-                                {{ __('Two factor authentication is now enabled. Scan the following QR code using your phone\'s authenticator application or enter the setup key.') }}
+                                {{ __('El token ahora está habilitada. Escanee el siguiente código QR usando la aplicación de autenticación de su teléfono o ingrese la clave de configuración.') }}
                             @endif
                         </p>
                     </div>
@@ -33,7 +33,7 @@
 
                     <div class="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                         <p class="font-semibold">
-                            {{ __('Setup Key') }}: {{ decrypt($this->user->token_secret) }}
+                            {{ __('Clave de configuración') }}: {{ decrypt($this->user->token_secret) }}
                         </p>
                     </div>
 
@@ -50,7 +50,7 @@
                 @if ($showingRecoveryCodes)
                     <div class="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                         <p class="font-semibold">
-                            {{ __('Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.') }}
+                            {{ __('Guarde estos códigos de recuperación en un administrador de contraseñas seguro. Se pueden usar para recuperar el acceso a su cuenta si pierde su dispositivo token.') }}
                         </p>
                     </div>
 
@@ -65,26 +65,26 @@
                 @if (! $this->enabled)
                     <x-confirms-password wire:then="enableTokenAuthentication">
                         <button class="btn btn-success btn-lg w-25" wire:loading.attr="disabled" >
-                            {{ __('Enable') }}
+                            {{ __('Habilitar') }}
                         </button>
                     </x-confirms-password>
                 @else
                     @if ($showingRecoveryCodes)
                         <x-confirms-password wire:then="regenerateRecoveryCodes">
                             <button class="btn btn-success btn-lg w-25">
-                                {{ __('Regenerate Recovery Codes') }}
+                                {{ __('Generar nuevos códigos') }}
                             </button>
                         </x-confirms-password>
                     @elseif ($showingConfirmation)
                         <x-confirms-password wire:then="confirmTokenAuthentication">
                             <button type="button" class="btn btn-success btn-lg w-25" wire:loading.attr="disabled">
-                                {{ __('Confirm') }}
+                                {{ __('Confirmar') }}
                             </button>
                         </x-confirms-password>
                     @else
                         <x-confirms-password wire:then="showRecoveryCodes">
                             <button class="btn btn-success btn-lg w-25">
-                                {{ __('Show Recovery Codes') }}
+                                {{ __('Mostrar códigos de recuperación') }}
                             </button>
                         </x-confirms-password>
                     @endif
@@ -92,13 +92,13 @@
                     @if ($showingConfirmation)
                         <x-confirms-password wire:then="disableTokenAuthentication">
                             <button class="btn btn-warning btn-lg w-25" wire:loading.attr="disabled">
-                                {{ __('Cancel') }}
+                                {{ __('Cancelar') }}
                             </button>
                         </x-confirms-password>
                     @else
                         <x-confirms-password wire:then="disableTokenAuthentication">
                             <button class="btn btn-danger btn-lg w-25" wire:loading.attr="disabled">
-                                {{ __('Disable') }}
+                                {{ __('Desvincular Token') }}
                             </button>
                         </x-confirms-password>
                     @endif
