@@ -67,7 +67,7 @@
                                 <a class="btn btn-primary w-100" href="{{ route( 'view-vehicle', $vehicle ) }}"> {{ __('Ver') }} </a>
                                 @if( $vehicle->isManegableByAuth() )
                                     <a href="{{ route('edit-vehicle', $vehicle) }}" class="btn btn-success w-100"> {{ __('Editar') }} </a>
-                                    <button class="btn btn-warning w-100" wire:click="$refresh"> {{ __('Desvincular') }} </button>
+                                    <button class="btn btn-warning w-100" wire:click="vehicleUnlink({{ $vehicle->id }})"> {{ __('Desvincular') }} </button>
                                 @else
                                     @if($vehicle->company_id)
                                         <button class="btn btn-info w-100" wire:click="vehicleTransfer({{ $vehicle->id }})"> {{ __('Traspaso') }} </button>
